@@ -7,6 +7,8 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -69,12 +71,13 @@ class MainActivity : AppCompatActivity() {
     private fun playGame(callId:Int, btnPressed:Button){
         if(activePlayer == 1){
             btnPressed.text = "X"
-            btnPressed.setBackgroundColor(Color.GREEN)
+            btnPressed.setBackgroundResource(R.color.green)
             player1.add(callId)
             activePlayer = 2
+            autoPlay()
         }else{
             btnPressed.text = "O"
-            btnPressed.setBackgroundColor(Color.BLUE)
+            btnPressed.setBackgroundResource(R.color.blue)
             player2.add(callId)
             activePlayer = 1
         }
@@ -124,5 +127,35 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
+    }
+
+    private fun autoPlay(){
+        val emptyCells = ArrayList<Int>()
+
+        for (cellID in 1..9){
+            if(!(player1.contains(cellID)||player2.contains(cellID))){
+                emptyCells.add(cellID)
+            }
+        }
+
+        val r = Random()
+        val randomIndex = r.nextInt(emptyCells.size - 0) + 0
+        val cellID = emptyCells[randomIndex]
+
+        val buSelect:Button
+        buSelect = when(cellID){
+            1 -> bu1
+            2 -> bu2
+            3 -> bu3
+            4 -> bu4
+            5 -> bu5
+            6 -> bu6
+            7 -> bu7
+            8 -> bu8
+            9 -> bu9
+            else -> bu9
+        }
+
+        playGame(cellID, buSelect)
     }
 }
