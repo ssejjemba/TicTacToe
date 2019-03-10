@@ -71,13 +71,13 @@ class MainActivity : AppCompatActivity() {
     private fun playGame(callId:Int, btnPressed:Button){
         if(activePlayer == 1){
             btnPressed.text = "X"
-            btnPressed.setBackgroundResource(R.color.green)
+            btnPressed.setBackgroundResource(R.color.blue)
             player1.add(callId)
             activePlayer = 2
             autoPlay()
         }else{
             btnPressed.text = "O"
-            btnPressed.setBackgroundResource(R.color.blue)
+            btnPressed.setBackgroundResource(R.color.darkgreen)
             player2.add(callId)
             activePlayer = 1
         }
